@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { List, ListItem } from "../List";
-
+import { Input, TextArea, FormBtn } from '../Form';
 class Modal extends Component{
     
 
@@ -20,8 +20,8 @@ class Modal extends Component{
         if(this.props.infoType === 'type'){
             console.log('displaying types');
             return (
-                <div>
-                    <h2>{this.props.infoType.toUpperCase()}</h2>
+                <div className="center">
+                    <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
                     {this.props.info.length ? (
                         <List>
                             {this.props.info.map(type => (
@@ -36,9 +36,9 @@ class Modal extends Component{
                             <h3>Error fetching type!</h3>
                         )}
                     <div>
-                        <button onClick={event => {
+                        <FormBtn onClick={event => {
                             this.onClose(event);
-                        }}>Close</button>
+                        }}>Close</FormBtn>
                     </div>
                 </div>
             );
@@ -47,8 +47,8 @@ class Modal extends Component{
             console.log('displaying stats');
             console.log(JSON.stringify(this.props.info));
             return (
-                <div>
-                    <h2>{this.props.infoType.toUpperCase()}</h2>
+                <div className="center">
+                    <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
                     {this.props.info.length ? (
                         <List>
                             {this.props.info.map(stat => (
@@ -63,9 +63,9 @@ class Modal extends Component{
                             <h3>Error fetching type!</h3>
                         )}
                     <div>
-                        <button onClick={event => {
+                        <FormBtn onClick={event => {
                             this.onClose(event);
-                        }}>Close</button>
+                        }} className="center">Close</FormBtn>
                     </div>
                 </div>
             );
@@ -73,8 +73,8 @@ class Modal extends Component{
         else if(this.props.infoType === 'games'){
             console.log('displaying games');
             return (
-                <div>
-                    <h2>{this.props.infoType.toUpperCase()}</h2>
+                <div className="center">
+                    <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
                     {this.props.info.length ? (
                         <List>
                             {this.props.info.map(game => (
@@ -89,9 +89,9 @@ class Modal extends Component{
                             <h3>Error fetching type!</h3>
                         )}
                     <div>
-                        <button onClick={event => {
+                        <FormBtn onClick={event => {
                             this.onClose(event);
-                        }}>Close</button>
+                        }} className="center">Close</FormBtn>
                     </div>
                 </div>
             );
@@ -101,9 +101,9 @@ class Modal extends Component{
                 <div>
                     <div>ERROR: No information to show!</div>
                     <div>
-                        <button onClick={event => {
+                        <FormBtn onClick={event => {
                             this.onClose(event);
-                        }}>Close</button>
+                        }} className='toggle-button'>Close</FormBtn>
                     </div>
                 </div>
             );

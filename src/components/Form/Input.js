@@ -2,6 +2,6 @@ import React from "react";
 
 export const Input = props => (
   <div className="form-group">
-    <input className="form-control" {...props} />
+    <input style={{ float: "center", marginBottom: 10 }} className="form-control" {...props} />
   </div>
 );

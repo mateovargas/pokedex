@@ -9,6 +9,7 @@ function App() {
   return (
     <Pokemon></Pokemon>
   );
+  
 }
 
 export default App;

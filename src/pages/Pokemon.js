@@ -106,20 +106,21 @@ class Pokemon extends Component {
         return(
             <Container fluid>
                 <Row>
-                    <Col size="md-6 sm-12">
+                    <Col size="md-12 sm-12 lg-12 xl-12">
                         <Jumbotron>
-                            <h1>Pokedex!</h1>
-                            <strong><h2>{this.state.name.toUpperCase()}</h2></strong>
-                            <img src={this.state.sprites.front_default}></img>
-                            <img src={this.state.sprites.back_default}></img>
+                            <div>
+                                <h1>Pokedex!</h1>
+                                <strong><h2>{this.state.name.toUpperCase()}</h2></strong>
+                                <img src={this.state.sprites.front_default}></img>
+                                <img src={this.state.sprites.back_default}></img>
+                            </div>
                         </Jumbotron>
                     </Col>
                 </Row>
                 <Row>
-                    <Col size="md-6 sm-12">
-                        <Container>
+                    <Col size="md-6 sm-6 lg-6 xl-6">
                             <form>
-                                <h1>Search for a Pokemon in the field below!</h1>
+                                <h3>Search for a Pokemon in the field below!</h3>
                                 <Input
                                     value={this.state.name}
                                     onChange={this.handleInputChange}
@@ -134,49 +135,44 @@ class Pokemon extends Component {
                                     Search that Pokemon!
                                 </FormBtn>
                             </form>
-                        </Container>
                     </Col>
-                </Row>
-                <Row>
-                    <Col size="md-6 sm-12"> 
+                    <Col size="md-6 sm-6 lg-6 xl-6">
                         <Modal show={this.state.show} onClose={this.showModal} info={this.state.modalInfo} infoType={this.state.infoType} />
-                        <Container>
-                            <List>
-                                <ListItem>
-                                    <strong>
-                                        Species: {this.state.species.name}
-                                    </strong>
-                                </ListItem>
-                                <ListItem>
-                                    <strong>Types:</strong>
-                                    <button onClick={event => {
-                                        this.showModal('type');
-                                    }}>View Types</button>
-                                </ListItem>
-                                <ListItem>
-                                    <strong>
-                                        Weight (In hectograms): {this.state.weight}
-                                    </strong>
-                                </ListItem>
-                                <ListItem>
-                                    <strong>
-                                        Height (In decimeters): {this.state.height}
-                                    </strong>
-                                </ListItem>
-                                <ListItem>
-                                    <strong>Base Stats:</strong>
-                                    <button onClick={event => {
-                                        this.showModal('stats');
-                                    }}>View Stats</button>
-                                </ListItem>
-                                <ListItem>
-                                    <strong>Appears In:</strong>
-                                    <button onClick={event => {
-                                        this.showModal('games');
-                                    }}>View Game Appearances</button>
-                                </ListItem>
-                            </List>
-                        </Container>
+                        <List>
+                            <ListItem>
+                                <strong>
+                                    Species: {this.state.species.name}
+                                </strong>
+                            </ListItem>
+                            <ListItem>
+                                <strong>Types: </strong>
+                                <button onClick={event => {
+                                    this.showModal('type');
+                                }}>View Types</button>
+                            </ListItem>
+                            <ListItem>
+                                <strong>
+                                    Weight (In hectograms): {this.state.weight}
+                                </strong>
+                            </ListItem>
+                            <ListItem>
+                                <strong>
+                                    Height (In decimeters): {this.state.height}
+                                </strong>
+                            </ListItem>
+                            <ListItem>
+                                <strong>Base Stats: </strong>
+                                <button onClick={event => {
+                                    this.showModal('stats');
+                                }}>View Stats</button>
+                            </ListItem>
+                            <ListItem>
+                                <strong>Appears In: </strong>
+                                <button onClick={event => {
+                                    this.showModal('games');
+                                }}>View Game Appearances</button>
+                            </ListItem>
+                        </List>
                     </Col>
                 </Row>
             </Container>
