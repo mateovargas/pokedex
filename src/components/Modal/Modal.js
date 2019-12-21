@@ -10,15 +10,11 @@ class Modal extends Component{
     }
 
     render(){
-
-        console.log(this.props);
-        console.log(JSON.stringify(this.props));
         if(!this.props.show){
             return null;
         }
 
         if(this.props.infoType === 'type'){
-            console.log('displaying types');
             return (
                 <div className="center">
                     <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
@@ -44,8 +40,6 @@ class Modal extends Component{
             );
         }
         else if(this.props.infoType === 'stats'){
-            console.log('displaying stats');
-            console.log(JSON.stringify(this.props.info));
             return (
                 <div className="center">
                     <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
@@ -71,7 +65,6 @@ class Modal extends Component{
             );
         }
         else if(this.props.infoType === 'games'){
-            console.log('displaying games');
             return (
                 <div className="center">
                     <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
@@ -96,6 +89,32 @@ class Modal extends Component{
                 </div>
             );
         }
+        /**else if{
+            return(
+               <div className = "center" >
+                    <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
+                    { this.props.info.length ? (
+                <List>
+                    {this.props.info.map(evolution => (
+                        <ListItem key={evolution.chain.name}>
+                            <strong>
+                                {game.version.name}
+                            </strong>
+                        </ListItem>
+                    ))}
+                </List>
+            ) : (
+                    <h3>Error fetching type!</h3>
+                )
+        }
+            < div >
+            <FormBtn onClick={event => {
+                this.onClose(event);
+            }} className="center">Close</FormBtn>
+                    </div >
+                </div >
+            );
+        }**/
         else{
             return (
                 <div>

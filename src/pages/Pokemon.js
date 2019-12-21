@@ -23,18 +23,16 @@ class Pokemon extends Component {
         stats: [],
         show: false,
         modalInfo: {},
-        infoType: ''
+        infoType: '',
+        evolutionChain: {}
     }
 
     componentDidMount() {
-        console.log("component did mount!");
         this.loadAPokemon();
     }
 
     loadAPokemon = () => {
-        console.log("called loadapokemon");
         let id = Math.floor(Math.random() * 807);
-        console.log(id);
         API.getPokemon(id)
             .then(result => {
                     console.log(result.data.name);
@@ -42,10 +40,35 @@ class Pokemon extends Component {
                     this.setState({name: result.data.name, type: result.data.types, height: result.data.height, 
                         weight: result.data.weight, sprites: result.data.sprites, id: result.data.id, species: 
                         result.data.species, order: result.data.order, location: result.data.location_area_encounters,
-                        games: result.data.game_indices, stats: result.data.stats})
+                        games: result.data.game_indices, stats: result.data.stats});
+                    this.loadEvolutionChain(this.state.id);
                 }
             )
             .catch(error => console.log(error));
+    }
+
+    loadEvolutionChain = (name) => {
+
+        console.log("called loadEvolution Chain");
+        if(this.state.id === ''){
+            console.log("Error Finding Evolution Chain!");
+            return 1;
+        }
+        else{
+            console.log("id is: " + this.state.id);
+            console.log("name is: " + this.state.name);
+            API.getSpeciesInfo(this.state.name)
+                .then(result => {
+                    console.log(JSON.stringify(result.data.evolution_chain));
+                    API.getEvolutionChain(result.data.evolution_chain.url)
+                        .then(result => {
+                            console.log(JSON.stringify(result.data));
+                        })
+                        .catch(error => console.log(error));
+                   // this.setState({evolutionChain: result.data.evolves_to});
+                })
+                .catch(error => console.log(error));
+        }
     }
 
     handleInputChange = event => {
@@ -66,6 +89,8 @@ class Pokemon extends Component {
                             result.data.species, order: result.data.order, location: result.data.location_area_encounters,
                         games: result.data.game_indices, stats: result.data.stats
                     });
+
+                    this.loadEvolutionChain(this.state.id);
                 })
                 .catch(error => console.log(error));
         }
@@ -140,11 +165,6 @@ class Pokemon extends Component {
                         <Modal show={this.state.show} onClose={this.showModal} info={this.state.modalInfo} infoType={this.state.infoType} />
                         <List>
                             <ListItem>
-                                <strong>
-                                    Species: {this.state.species.name}
-                                </strong>
-                            </ListItem>
-                            <ListItem>
                                 <strong>Types: </strong>
                                 <button onClick={event => {
                                     this.showModal('type');
@@ -165,6 +185,12 @@ class Pokemon extends Component {
                                 <button onClick={event => {
                                     this.showModal('stats');
                                 }}>View Stats</button>
+                            </ListItem>
+                            <ListItem>
+                                <strong>Evolves into: </strong>
+                                <button onClick={event => {
+                                    this.showModal('evolutionChain');
+                                }}>View Evolutions</button>
                             </ListItem>
                             <ListItem>
                                 <strong>Appears In: </strong>
