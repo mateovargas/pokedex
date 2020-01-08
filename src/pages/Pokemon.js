@@ -32,6 +32,7 @@ class Pokemon extends Component {
     }
 
     loadAPokemon = () => {
+
         let id = Math.floor(Math.random() * 807);
         API.getPokemon(id)
             .then(result => {
@@ -59,13 +60,13 @@ class Pokemon extends Component {
             console.log("name is: " + this.state.name);
             API.getSpeciesInfo(this.state.name)
                 .then(result => {
-                    console.log(JSON.stringify(result.data.evolution_chain));
                     API.getEvolutionChain(result.data.evolution_chain.url)
                         .then(result => {
-                            console.log(JSON.stringify(result.data));
+                            this.setState({
+                                evolutionChain: result.data.chain.evolves_to[0]
+                            })
                         })
                         .catch(error => console.log(error));
-                   // this.setState({evolutionChain: result.data.evolves_to});
                 })
                 .catch(error => console.log(error));
         }
@@ -90,7 +91,7 @@ class Pokemon extends Component {
                         games: result.data.game_indices, stats: result.data.stats
                     });
 
-                    this.loadEvolutionChain(this.state.id);
+                    this.loadEvolutionChain(this.state.name);
                 })
                 .catch(error => console.log(error));
         }
@@ -103,6 +104,7 @@ class Pokemon extends Component {
     }
 
     showModal = (info) => {
+
         if(info === "type"){
             this.setState({
                 modalInfo: this.state.type,
@@ -115,10 +117,16 @@ class Pokemon extends Component {
                 infoType: 'stats'
             });
         }
-        else{
+        else if(info ==="games"){
             this.setState({
                 modalInfo: this.state.games,
                 infoType: 'games'
+            })
+        }
+        else if(info === "evolutionChain"){
+            this.setState({
+                modalInfo: this.state.evolutionChain,
+                infoType: 'evolutionChain'
             })
         }
 
