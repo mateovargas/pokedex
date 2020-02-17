@@ -170,7 +170,7 @@ class Pokemon extends Component {
                             </form>
                     </Col>
                     <Col size="md-6 sm-6 lg-6 xl-6">
-                        <Modal show={this.state.show} onClose={this.showModal} info={this.state.modalInfo} infoType={this.state.infoType} />
+                        <Modal show={this.state.show} onClose={this.showModal} info={this.state.modalInfo} infoType={this.state.infoType} currPokemon={this.state.name} />
                         <List>
                             <ListItem>
                                 <strong>Types: </strong>

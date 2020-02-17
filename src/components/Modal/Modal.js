@@ -90,7 +90,7 @@ class Modal extends Component{
             );
         }
         else if(this.props.infoType === 'evolutionChain'){
-            if(this.props.info.length === 0){
+            if(this.props.info === undefined || this.props.info.length === 0){
                 return(
                     <div className="center" >
                         <h2 className="center">No known Evolutions!</h2>
@@ -103,30 +103,45 @@ class Modal extends Component{
                 );
             }
             else{
-            console.log('evolution chain is: \n' + JSON.stringify(this.props.info, undefined, 4));
+                console.log('evolution chain is: \n' + JSON.stringify(this.props.info, undefined, 4));
 
-            let evolutionList = [];
-            evolutionList.push(this.props.info.name);
-            console.log('evolList is: ' + evolutionList.toString());
-            return(
-                <div className = "center" >
-                    <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
-                    { this.props.info.length ? (
-                    <List>
-                        {this.props.info.map(evolution => (
-                            <ListItem key={evolution.species.name}>
-                                <strong>
-                                    {evolution.species.name}
-                                </strong>
-                            </ListItem>
-                        ))}
-                    </List>
-                ):(
-                        <h3>Error fetching Evolutions!</h3>
-                    )
+                let evolutionList = [];
+                try{
+                    if (this.props.info.species.name !== this.props.currPokemon && 
+                        this.props.info.evolves_to[0].species.name !== this.props.currPokemon){
+                        evolutionList.push(this.props.info.species.name);
                     }
-                        <div>
-                            <FormBtn onClick={event => {
+                }catch(error){
+                    evolutionList.push('No currently known Evolutions!');
+                }
+                try{
+                    if (this.props.info.evolves_to[0].species.name !== this.props.currPokemon){
+                        evolutionList.push(this.props.info.evolves_to[0].species.name);
+                    }else{
+                        evolutionList.push('No currently known Evolutions!');
+                    }
+                }catch(error){}
+
+                console.log('evolList is: ' + evolutionList.toString());
+                return(
+                    <div className = "center" >
+                        <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
+                        {evolutionList.length ? (
+                        <List>
+                            {evolutionList.map(evolution => (
+                                <ListItem key={evolution}>
+                                    <strong>
+                                        {evolution}
+                                    </strong>
+                                </ListItem>
+                            ))}
+                        </List>
+                    ):(
+                            <h3>Error fetching Evolutions!</h3>
+                        )
+                    }
+                    <div>
+                        <FormBtn onClick={event => {
                             this.onClose(event);
                             }}className="center">Close</FormBtn>
                         </div>
