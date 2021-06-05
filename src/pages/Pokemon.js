@@ -6,6 +6,7 @@ import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import { List, ListItem} from "../components/List";
 import Modal from "../components/Modal";
+import './Pokemon.css';
 
 class Pokemon extends Component {
 
@@ -135,42 +136,50 @@ class Pokemon extends Component {
         });
     };
 
+    
+
     render(){
         return(
+            <div id='main-contents'>
             <Container fluid>
                 <Row>
                     <Col size="md-12 sm-12 lg-12 xl-12">
                         <Jumbotron>
-                            <div>
-                                <h1>Pokedex!</h1>
-                                <strong><h2>{this.state.name.toUpperCase()}</h2></strong>
-                                <img src={this.state.sprites.front_default}></img>
-                                <img src={this.state.sprites.back_default}></img>
-                            </div>
+                                <div id='jumbotron-contents'>
+                                    <h1>Pokedex!</h1>
+                                    <strong><h2>{this.state.name.toUpperCase()}</h2></strong>
+                                    <div class="img-container">
+                                        <img src={this.state.sprites.front_default}></img>
+                                        <img src={this.state.sprites.back_default}></img>
+                                    </div>
+                                </div>
                         </Jumbotron>
                     </Col>
                 </Row>
+                <Modal show={this.state.show} onClose={this.showModal} info={this.state.modalInfo}
+                    infoType={this.state.infoType} currPokemon={this.state.name} />
                 <Row>
                     <Col size="md-6 sm-6 lg-6 xl-6">
                             <form>
-                                <h3>Search for a Pokemon in the field below!</h3>
-                                <Input
-                                    value={this.state.name}
-                                    onChange={this.handleInputChange}
-                                    name="name"
-                                    placeholder="Name (Required)"
-                                    onKeyPress={this.keyPressed}
-                                />
-                                <FormBtn
-                                    disabled={!(this.state.name)}
-                                    onClick={this.handleFormSubmit}
-                                >
-                                    Search that Pokemon!
-                                </FormBtn>
+                                <div class='form-content'>
+                                    <h3>Search for a Pokemon in the field below!</h3>
+                                    <Input
+                                        value={this.state.name}
+                                        onChange={this.handleInputChange}
+                                        name="name"
+                                        placeholder="Name (Required)"
+                                        onKeyPress={this.keyPressed}
+                                    />
+                                    <FormBtn
+                                        disabled={!(this.state.name)}
+                                        onClick={this.handleFormSubmit}
+                                    >
+                                        Search that Pokemon!
+                                    </FormBtn>
+                                </div>
                             </form>
                     </Col>
                     <Col size="md-6 sm-6 lg-6 xl-6">
-                        <Modal show={this.state.show} onClose={this.showModal} info={this.state.modalInfo} infoType={this.state.infoType} currPokemon={this.state.name} />
                         <List>
                             <ListItem>
                                 <strong>Types: </strong>
@@ -210,6 +219,7 @@ class Pokemon extends Component {
                     </Col>
                 </Row>
             </Container>
+            </div>
         );
     }
 

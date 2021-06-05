@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import { List, ListItem } from "../List";
 import { Input, TextArea, FormBtn } from '../Form';
+import "./Modal.css";
+
 class Modal extends Component{
     
 
@@ -16,25 +18,33 @@ class Modal extends Component{
 
         if(this.props.infoType === 'type'){
             return (
-                <div className="center">
-                    <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
-                    {this.props.info.length ? (
-                        <List>
-                            {this.props.info.map(type => (
-                                <ListItem key={type.type.name}>
-                                    <strong>
-                                        {type.type.name}
-                                    </strong>
-                                </ListItem>
-                            ))}
-                        </List>
-                    ) : (
-                            <h3>Error fetching Type!</h3>
-                        )}
-                    <div>
-                        <FormBtn onClick={event => {
-                            this.onClose(event);
-                        }}>Close</FormBtn>
+                <div className="modal-fade" role="dialog" tabindex="-1">
+                    <div className={["modal-dialog", "modal-dialog-centered"].join(' ')} role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">{this.props.infoType.toUpperCase()}</h5>
+                            </div>
+                            <div className="modal-body">
+                                {this.props.info.length ? (
+                                    <List>
+                                        {this.props.info.map(type => (
+                                            <ListItem key={type.type.name}>
+                                                <strong>
+                                                    {type.type.name}
+                                                </strong>
+                                            </ListItem>
+                                        ))}
+                                    </List>
+                                ) : (
+                                    <h3>Error fetching Type!</h3>
+                                )}
+                                <div>
+                                    <FormBtn onClick={event => {
+                                        this.onClose(event);
+                                    }}>Close</FormBtn>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             );

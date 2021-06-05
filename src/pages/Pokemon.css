@@ -1,0 +1,33 @@
+h2 {
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+}
+
+.img-container{
+    text-align: center;
+}
+
+#main-contents{
+    background-color: red;
+}
+
+#jumbotron-contents{
+    background-color:darkolivegreen;
+    border-style: double;
+    border-color: black;
+    border-width: thick;
+
+}
+
+.form-content{
+    text-align: center;
+}
+
+.form-control{
+    background-color:black;
+    font-family:monospace;
+    color: white;
+}
