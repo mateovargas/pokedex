@@ -150,10 +150,10 @@ class Modal extends Component{
                             <h3>Error fetching Evolutions!</h3>
                         )
                     }
-                    <div>
-                        <FormBtn onClick={event => {
-                            this.onClose(event);
-                            }}className="center">Close</FormBtn>
+                        <div>
+                            <FormBtn onClick={event => {
+                                this.onClose(event);
+                                }}className="center">Close</FormBtn>
                         </div>
                     </div>
                 );

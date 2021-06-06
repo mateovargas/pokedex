@@ -185,7 +185,7 @@ class Pokemon extends Component {
                                 <strong>Types: </strong>
                                 <button onClick={event => {
                                     this.showModal('type');
-                                }}>View Types</button>
+                                    }} className="btn btn-warning">View Types</button>
                             </ListItem>
                             <ListItem>
                                 <strong>
@@ -201,19 +201,19 @@ class Pokemon extends Component {
                                 <strong>Base Stats: </strong>
                                 <button onClick={event => {
                                     this.showModal('stats');
-                                }}>View Stats</button>
+                                    }} className="btn btn-warning">View Stats</button>
                             </ListItem>
                             <ListItem>
                                 <strong>Evolves into: </strong>
                                 <button onClick={event => {
                                     this.showModal('evolutionChain');
-                                }}>View Evolutions</button>
+                                    }} className="btn btn-warning">View Evolutions </button>
                             </ListItem>
                             <ListItem>
                                 <strong>Appears In: </strong>
                                 <button onClick={event => {
                                     this.showModal('games');
-                                }}>View Game Appearances</button>
+                                    }} className="btn btn-warning">View Game Appearances</button>
                             </ListItem>
                         </List>
                     </Col>
