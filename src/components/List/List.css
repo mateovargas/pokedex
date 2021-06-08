@@ -10,6 +10,20 @@
   font-family:monospace;
 }
 
+
+.list-overflow-container-modal {
+  max-height: 545px;
+  border: black double;
+  border-radius: 4px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: white;
+  text-align: center;
+  color: black;
+  font-family:monospace;
+}
+
+
 .list-overflow-container ul {
   margin: 0;
   background-color: blue;
@@ -21,6 +35,14 @@
   border-right: none;
   background-color: blue;
 }
+
+.list-overflow-container-modal li {
+  border-radius: 0px;
+  border-left: none;
+  border-right: none;
+  background-color: white;
+}
+
 
 .list-overflow-container li * {
   cursor: pointer;

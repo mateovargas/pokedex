@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { List, ListItem } from "../List";
+import { List, ListItem, ModalList} from "../List";
 import { Input, TextArea, FormBtn } from '../Form';
 import "./Modal.css";
 
@@ -26,7 +26,7 @@ class Modal extends Component{
                             </div>
                             <div className="modal-body">
                                 {this.props.info.length ? (
-                                    <List>
+                                    <ModalList>
                                         {this.props.info.map(type => (
                                             <ListItem key={type.type.name}>
                                                 <strong>
@@ -34,10 +34,11 @@ class Modal extends Component{
                                                 </strong>
                                             </ListItem>
                                         ))}
-                                    </List>
+                                    </ModalList>
                                 ) : (
                                     <h3>Error fetching Type!</h3>
                                 )}
+                                <br></br>
                                 <div>
                                     <FormBtn onClick={event => {
                                         this.onClose(event);
@@ -51,50 +52,68 @@ class Modal extends Component{
         }
         else if(this.props.infoType === 'stats'){
             return (
-                <div className="center">
-                    <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
-                    {this.props.info.length ? (
-                        <List>
-                            {this.props.info.map(stat => (
-                                <ListItem key={stat.stat.name}>
-                                    <strong>
-                                        {stat.stat.name}: {stat.base_stat}
-                                    </strong>
-                                </ListItem>
-                            ))}
-                        </List>
-                    ) : (
-                            <h3>Error fetching Stats!</h3>
-                        )}
-                    <div>
-                        <FormBtn onClick={event => {
-                            this.onClose(event);
-                        }} className="center">Close</FormBtn>
+                <div className="modal-fade" role="dialog" tabindex="-1">
+                    <div className={["modal-dialog", "modal-dialog-centered"].join(' ')} role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">{this.props.infoType.toUpperCase()}</h5>
+                            </div>
+                            <div className="modal-body">
+                                {this.props.info.length ? (
+                                    <ModalList>
+                                        {this.props.info.map(stat => (
+                                            <ListItem key={stat.stat.name}>
+                                                <strong>
+                                                    {stat.stat.name}: {stat.base_stat}
+                                                </strong>
+                                            </ListItem>
+                                        ))}
+                                    </ModalList>
+                                ) : (
+                                    <h3>Error fetching Stats!</h3>
+                                )}
+                                <br></br>
+                                <div>
+                                    <FormBtn onClick={event => {
+                                        this.onClose(event);
+                                    }} className="center">Close</FormBtn>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             );
         }
         else if(this.props.infoType === 'games'){
             return (
-                <div className="center">
-                    <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
-                    {this.props.info.length ? (
-                        <List>
-                            {this.props.info.map(game => (
-                                <ListItem key={game.version.name}>
-                                    <strong>
-                                        {game.version.name}
-                                    </strong>
-                                </ListItem>
-                            ))}
-                        </List>
-                    ) : (
-                            <h3>Error fetching Games!</h3>
-                        )}
-                    <div>
-                        <FormBtn onClick={event => {
-                            this.onClose(event);
-                        }} className="center">Close</FormBtn>
+                <div className="modal-fade" role="dialog" tabindex="-1">
+                    <div className={["modal-dialog", "modal-dialog-centered"].join(' ')} role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">{this.props.infoType.toUpperCase()}</h5>
+                            </div>
+                            <div className="modal-body">
+                                {this.props.info.length ? (
+                                    <ModalList>
+                                        {this.props.info.map(game => (
+                                            <ListItem key={game.version.name}>
+                                                <strong>
+                                                    {game.version.name}
+                                                </strong>
+                                            </ListItem>
+                                        ))}
+                                    </ModalList>
+                                ) : (
+                                    <h3>Error fetching Games!</h3>
+                                )}
+                                <br></br>
+                                <div>
+                                    <FormBtn onClick={event => {
+                                        this.onClose(event);
+                                    }} className="center">Close</FormBtn>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             );
@@ -102,18 +121,28 @@ class Modal extends Component{
         else if(this.props.infoType === 'evolutionChain'){
             if(this.props.info === undefined || this.props.info.length === 0){
                 return(
-                    <div className="center" >
-                        <h2 className="center">No known Evolutions!</h2>
-                        <div>
-                            <FormBtn onClick={event => {
-                                this.onClose(event);
-                            }} className="center">Close</FormBtn>
-                        </div >
-                    </div >
+                    <div className="modal-fade" role="dialog" tabindex="-1">
+                        <div className={["modal-dialog", "modal-dialog-centered"].join(' ')} role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title">{this.props.infoType.toUpperCase()}</h5>
+                                </div>
+                                <div className="modal-body">
+                                <div>
+                                    <div>No known Evolutions!</div>
+                                    <br></br>
+                                    <FormBtn onClick={event => {
+                                        this.onClose(event);
+                                    }} className="center">Close</FormBtn>
+                                </div >
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 );
             }
             else{
-                console.log('evolution chain is: \n' + JSON.stringify(this.props.info, undefined, 4));
+
 
                 let evolutionList = [];
                 try{
@@ -131,29 +160,38 @@ class Modal extends Component{
                         evolutionList.push('No currently known Evolutions!');
                     }
                 }catch(error){}
-
-                console.log('evolList is: ' + evolutionList.toString());
+                
                 return(
-                    <div className = "center" >
-                        <h2 className="center">{this.props.infoType.toUpperCase()}</h2>
-                        {evolutionList.length ? (
-                        <List>
-                            {evolutionList.map(evolution => (
-                                <ListItem key={evolution}>
-                                    <strong>
-                                        {evolution}
-                                    </strong>
-                                </ListItem>
-                            ))}
-                        </List>
-                    ):(
-                            <h3>Error fetching Evolutions!</h3>
-                        )
-                    }
-                        <div>
-                            <FormBtn onClick={event => {
-                                this.onClose(event);
-                                }}className="center">Close</FormBtn>
+
+                    <div className="modal-fade" role="dialog" tabindex="-1">
+                        <div className={["modal-dialog", "modal-dialog-centered"].join(' ')} role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title">{this.props.infoType.toUpperCase()}</h5>
+                                </div>
+                                <div className="modal-body">
+                                    {evolutionList.length ? (
+                                        <ModalList>
+                                        {evolutionList.map(evolution => (
+                                            <ListItem key={evolution}>
+                                        <strong>
+                                            {evolution}
+                                        </strong>
+                                            </ListItem>
+                                        ))}
+                                        </ModalList>
+                                    ):(
+                                        <h3>Error fetching Evolutions!</h3>
+                                    )
+                                }
+                                    <br></br>
+                                    <div>
+                                        <FormBtn onClick={event => {
+                                            this.onClose(event);
+                                            }}className="center">Close</FormBtn>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 );
@@ -161,12 +199,23 @@ class Modal extends Component{
         }
         else{
             return (
-                <div>
-                    <div>ERROR: No information to show!</div>
-                    <div>
-                        <FormBtn onClick={event => {
-                            this.onClose(event);
-                        }} className='toggle-button'>Close</FormBtn>
+
+                <div className="modal-fade" role="dialog" tabindex="-1">
+                    <div className={["modal-dialog", "modal-dialog-centered"].join(' ')} role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">{this.props.infoType.toUpperCase()}</h5>
+                            </div>
+                            <div className="modal-body">
+                                <div>ERROR: No information to show!</div>
+                                <br></br>
+                                <div>
+                                    <FormBtn onClick={event => {
+                                        this.onClose(event);
+                                    }} className='toggle-button'>Close</FormBtn>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             );
